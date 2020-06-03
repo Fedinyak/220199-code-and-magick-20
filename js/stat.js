@@ -9,6 +9,8 @@ var FONT_GAP = 15;
 var BAR_HEIGHT = 150;
 var BAR_WIDTH = 40;
 var BAR_GAP = 50;
+var TEXT_VICTORY = 'Ура вы победили!';
+var TEXT_STAT = 'Список результатов:';
 
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
@@ -27,6 +29,14 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
+var getRandomSaturation = function () {
+  return 'hsl(255, ' + getRandomNumber(100) + '%, 50%)';
+};
+
+function getRandomNumber(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
 window.renderStatistics = function (ctx, players, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.3)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
@@ -35,18 +45,10 @@ window.renderStatistics = function (ctx, players, times) {
 
   ctx.font = '16px PT Mono';
   ctx.textBaseline = 'hanging';
-  ctx.fillText('Ура вы победили!', CLOUD_X + 20, CLOUD_Y + 20);
-  ctx.fillText('Список результатов:', CLOUD_X + 20, CLOUD_Y + 40);
+  ctx.fillText(TEXT_VICTORY, CLOUD_X + 20, CLOUD_Y + 20);
+  ctx.fillText(TEXT_STAT, CLOUD_X + 20, CLOUD_Y + 40);
 
   var maxTime = getMaxElement(times);
-
-  var getRandomSaturation = function () {
-    return 'hsl(255, ' + getRandomNumber(100) + '%, 50%)';
-  };
-
-  function getRandomNumber(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-  }
 
   for (var i = 0; i < players.length; i++) {
     ctx.fillStyle = '#000';
